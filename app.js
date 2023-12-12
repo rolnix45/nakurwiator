@@ -30,9 +30,9 @@ client.player = new Player(client, {
 client.player.extractors.loadDefault();
 
 let commands = [];
-const cmd_files = fs.readdirSync('./com').filter(file => file.endsWith('.js'));
+const cmd_files = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of cmd_files) {
-     const command = require(`./com/${file}`);
+     const command = require(`./commands/${file}`);
      client.slashcommands.set(command.data.name, command);
      if (LOAD_CMDS) {
           commands.push(command.data.toJSON());

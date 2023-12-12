@@ -9,11 +9,13 @@ module.exports = {
           const queue = useQueue(interaction.guild.id);
           try {
                queue.node.skip();
+               if (queue.isEmpty) 
+                    return interaction.followUp("❌ **KONIEC!!!** ❌");
                return interaction.followUp("⏭ **next nuta** ⏭");
           }
           catch (e) {
                console.error(`<seks.js> error ${e}`);
-               return interaction.followUp("koniec!!!");
+               return interaction.followUp(`💥 wyjbalo sie: ${e} 💥`);
           }
      },
 };

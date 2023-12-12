@@ -30,7 +30,7 @@ module.exports = {
                     nodeOptions: { metadata: interaction }
                });
                console.log(`joined ${interaction.member.voice.channel.name}`);
-               console.log(`requested ${track.title}; ${usr_input}`);
+               console.log(`got request from ${interaction.user.tag}; ${track.title}; ${usr_input}`);
                embed = {
                     image: { url: track.thumbnail },
                     description: `puszczone tak jak twoja stara 🤡🤡\n **${track.title}**`,
@@ -38,7 +38,7 @@ module.exports = {
                };
           }
           catch (e) {
-               console.log(`<cum.js> error ${e}`);
+               console.error(`<cum.js> error ${e}`);
                return interaction.followUp(`💥 wyjbalo sie: ${e} 💥`);
           };
           await interaction.editReply({
@@ -48,8 +48,9 @@ module.exports = {
 };
 
 const getSearchEngine = (usr_input, gdzie) => {
-     if (isValidUrl(usr_input))
+     if (isValidUrl(usr_input)) {
           return getSource(usr_input);
+     }
      else if (gdzie !== undefined && gdzie !== null) {
           switch (gdzie) {
                case "yt":
@@ -66,13 +67,13 @@ const getSearchEngine = (usr_input, gdzie) => {
                     return QueryType.YOUTUBE_SEARCH;
           };
      }
-     else
+     else {
           return QueryType.YOUTUBE_SEARCH;
+     }
 };
 
 const getSource = (string) => {
-     const domain = (new URL(string)).hostname.replace("www.", "");
-     switch (domain) {
+     switch ((new URL(string)).hostname.replace("www.", "")) {
           case "youtube.com":
                return QueryType.YOUTUBE_VIDEO;
           case "spotify.com":
@@ -85,14 +86,7 @@ const getSource = (string) => {
 };
 
 const isValidUrl = (string) => {
-     try {
-          new URL(string);
-     }
-     catch (_) {
-          return false;
-     };
+     try { new URL(string); }
+     catch (_) { return false; };
      return true;
-}; 
-
-//isValidUrl(usr_input) ? getSource(usr_input) : 
-//                    (gdzie === undefined ? QueryType.YOUTUBE_SEARCH : gdzie)
+};

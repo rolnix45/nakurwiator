@@ -9,7 +9,7 @@ module.exports = {
      run: async ({ client: _, interaction }) => {
           try {
                const con = getVoiceConnection(interaction.guild.id);
-               if (con === undefined) {
+               if (con === null || con === undefined) {
                     await interaction.followUp("nie ma mnie na kanale!!!!!!!");
                     return;
                };

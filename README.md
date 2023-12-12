@@ -3,7 +3,7 @@
 
 ## nalepszy music bot
 
-potrzebny `.env` w glownym folderze zawierajacy
+potrzebny `.env` w glownym folderze
 powinien wygladac tak:
 
 ```ini
